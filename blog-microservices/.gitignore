@@ -1,0 +1,29 @@
+# -----------------------------------------------------------------------------
+# .gitignore — arquivos que NÃO devem ir para o repositório
+# -----------------------------------------------------------------------------
+
+# Dependências instaladas pelo npm
+node_modules/
+
+# Variáveis de ambiente reais (podem conter segredos)
+.env
+.env.*
+!.env.example
+
+# Bancos SQLite locais e seus arquivos auxiliares (-wal, -shm, -journal)
+# Cada serviço cria a própria pasta ./data em tempo de execução
+data/
+*.sqlite*
+
+# Relatórios de cobertura gerados por `npm run test:coverage`
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos do sistema operacional e de editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
