@@ -9,7 +9,8 @@ Documentação do projeto [`blog-microservices`](../blog-microservices/), constr
 | Etapa | Conteúdo | Documentos | Status |
 |---|---|---|---|
 | **1** | Desenho da arquitetura e setup inicial | [01 · Arquitetura](./etapa-01/01-arquitetura-microsservicos.md) · [02 · Estrutura de pastas](./etapa-01/02-estrutura-de-pastas.md) · [03 · Configuração inicial](./etapa-01/03-configuracao-inicial.md) | Concluída |
-| **2** | *(a definir)* | — | Aguardando |
+| **2** | Microsserviço de Usuários (ms-users): infraestrutura, CRUD, autenticação JWT e testes unitários | [01 · Infraestrutura](./etapa-02/01-infraestrutura-ms-users.md) · [02 · CRUD e autenticação](./etapa-02/02-crud-e-autenticacao.md) · [03 · Testes unitários](./etapa-02/03-testes-unitarios.md) | Concluída |
+| **3** | *(a definir)* | — | Aguardando |
 
 ---
 
@@ -26,10 +27,14 @@ Documentação do projeto [`blog-microservices`](../blog-microservices/), constr
 ```text
 docs/
 ├── README.md                              ← este índice
-└── etapa-01/
-    ├── 01-arquitetura-microsservicos.md   ← teoria: divisão dos serviços e comunicação
-    ├── 02-estrutura-de-pastas.md          ← árvore completa do projeto e convenções
-    └── 03-configuracao-inicial.md         ← explicação de cada arquivo de configuração
+├── etapa-01/
+│   ├── 01-arquitetura-microsservicos.md   ← teoria: divisão dos serviços e comunicação
+│   ├── 02-estrutura-de-pastas.md          ← árvore completa do projeto e convenções
+│   └── 03-configuracao-inicial.md         ← explicação de cada arquivo de configuração
+└── etapa-02/
+    ├── 01-infraestrutura-ms-users.md      ← package.json, configuração, banco, composição e servidor
+    ├── 02-crud-e-autenticacao.md          ← endpoints, fluxos de cadastro e login, JWT e exemplos
+    └── 03-testes-unitarios.md             ← isolamento com stubs, mutação e como rodar os testes
 ```
 
 A pasta `docs/` fica **fora** de `blog-microservices/`, para que a documentação não seja misturada ao código executável do projeto.

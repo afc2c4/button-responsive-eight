@@ -25,7 +25,10 @@ export default defineConfig({
     // Não há DOM neste projeto: todo teste roda no ambiente Node.js.
     environment: 'node',
 
-    // Evita que mocks e espiões de um teste "vazem" para o próximo.
+    // clearMocks: zera o histórico de chamadas (mock.calls) entre os testes.
+    // restoreMocks: restaura os espiões criados com vi.spyOn.
+    // Nenhuma das duas apaga a implementação configurada com mockResolvedValue
+    // em um vi.fn(). Por isso os stubs são criados dentro de beforeEach nos testes.
     clearMocks: true,
     restoreMocks: true,
 

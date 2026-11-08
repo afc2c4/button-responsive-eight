@@ -176,6 +176,8 @@ NODE_ENV=development
 
 USERS_SERVICE_PORT=3001
 USERS_DB_PATH=./data/ms-users.sqlite
+JWT_SECRET=troque-este-valor-por-um-segredo-com-32-caracteres-ou-mais
+JWT_EXPIRES_IN=3600
 
 BLOG_SERVICE_PORT=3002
 BLOG_DB_PATH=./data/ms-blog.sqlite
@@ -191,6 +193,8 @@ USERS_SERVICE_TIMEOUT_MS=3000
 | `NODE_ENV` | `development` | Ambos | Ambiente de execução: `development`, `test` ou `production` |
 | `USERS_SERVICE_PORT` | `3001` | ms-users | Porta HTTP em que o ms-users escuta |
 | `USERS_DB_PATH` | `./data/ms-users.sqlite` | ms-users | Arquivo do banco do ms-users |
+| `JWT_SECRET` | `troque-este-valor-por-um-segredo-com-32-caracteres-ou-mais` | ms-users | Segredo usado para assinar os tokens. Mínimo de 32 caracteres. Acrescentado na Etapa 2 |
+| `JWT_EXPIRES_IN` | `3600` | ms-users | Validade do token, em segundos. Acrescentado na Etapa 2 |
 | `BLOG_SERVICE_PORT` | `3002` | ms-blog | Porta HTTP em que o ms-blog escuta |
 | `BLOG_DB_PATH` | `./data/ms-blog.sqlite` | ms-blog | Arquivo do banco do ms-blog |
 | `USERS_SERVICE_URL` | `http://localhost:3001` | ms-blog | Endereço que o ms-blog usa para chamar o ms-users |
@@ -224,10 +228,10 @@ A configuração global fica na raiz e vale para todo o monorepo. Ela está orga
 |---|---|---|
 | `globals` | `false` | `describe`, `it`, `expect` e `vi` precisam ser importados. O arquivo deixa explícito de onde vem cada função |
 | `environment` | `'node'` | Os testes rodam no Node.js. Não há DOM nem navegador neste projeto |
-| `clearMocks` | `true` | Limpa o histórico de chamadas dos mocks antes de cada teste |
-| `restoreMocks` | `true` | Restaura a implementação original dos espiões criados com `vi.spyOn`, antes de cada teste |
+| `clearMocks` | `true` | Zera o histórico de chamadas (`mock.calls`) dos mocks antes de cada teste |
+| `restoreMocks` | `true` | Restaura os espiões criados com `vi.spyOn` antes de cada teste |
 
-`clearMocks` e `restoreMocks` evitam que um teste "vaze" estado para o próximo. Um erro comum em aulas é um teste passar sozinho e falhar quando executado junto com outros.
+Atenção: nenhuma das duas opções apaga a **implementação** configurada com `mockResolvedValue` em um `vi.fn()`. Essa implementação continua valendo no teste seguinte. Por isso, na Etapa 2, os stubs são criados dentro de `beforeEach`. Essa limitação foi verificada com um experimento: o histórico de chamadas era limpo, mas o valor de retorno vazava.
 
 ### 9.2 Cobertura (`coverage`)
 
