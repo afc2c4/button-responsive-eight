@@ -11,10 +11,10 @@
     "services/*"
   ],
   "scripts": {
-    "test": "vitest run --passWithNoTests",
-    "test:unit": "vitest run --project unit --passWithNoTests",
+    "test": "vitest run",
+    "test:unit": "vitest run --project unit",
     "test:integration": "vitest run --project integration --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"
   },
   "devDependencies": {

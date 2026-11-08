@@ -60,10 +60,10 @@ O que cada comando faz:
     "services/*"
   ],
   "scripts": {
-    "test": "vitest run --passWithNoTests",
-    "test:unit": "vitest run --project unit --passWithNoTests",
+    "test": "vitest run",
+    "test:unit": "vitest run --project unit",
     "test:integration": "vitest run --project integration --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest"
   },
   "devDependencies": {
@@ -108,11 +108,13 @@ O `vitest@4.0.18` instala sem problemas nesse mesmo ambiente, e `vitest@3.2.7` t
 
 O Supertest não tem o mesmo problema de resolução de dependências, então podemos aceitar atualizações de patch e de minor dentro da versão 7 (`>=7.3.2 <8.0.0`).
 
-### Por que o `test` tem `--passWithNoTests`?
+### Por que o flag `--passWithNoTests`?
 
-Nesta etapa, **ainda não existe nenhum arquivo de teste**. Sem esse flag, o Vitest encerra com erro (código `1`) porque não encontrou nada para executar. Com o flag, o comando termina com sucesso e informa que nenhum arquivo foi encontrado.
+Na Etapa 1, ainda não existia nenhum arquivo de teste. Sem o flag, o Vitest encerra com erro (código `1`) quando não encontra nada para executar. Com o flag, o comando termina com sucesso e informa que nenhum arquivo foi encontrado.
 
-Esse flag é uma **medida temporária**: ele será retirado quando os primeiros testes forem escritos, para que um projeto sem testes não passe despercebido.
+Esse flag era uma **medida temporária**. Ele foi retirado da Etapa 2 em diante, quando os primeiros testes unitários passaram a existir. Assim, um projeto sem testes não passa despercebido.
+
+A exceção é o `test:integration`. Como os testes de integração ainda não foram escritos, o script mantém o flag. Ele deve sair junto com o primeiro teste de integração.
 
 ---
 
@@ -302,7 +304,7 @@ Execute, na pasta `blog-microservices`, os comandos abaixo. Cada um deve termina
 | `node -v` | `v22.x.x` |
 | `npx vitest --version` | `vitest/4.0.18` |
 | `npm ls --depth=0` | Lista `@vitest/coverage-v8@4.0.18`, `supertest@7.3.2` e `vitest@4.0.18`, sem erros |
-| `npm test` | Termina com código `0` e informa que nenhum arquivo de teste foi encontrado |
+| `npm test` | Termina com código `0`. Na Etapa 1, sem testes, informava "No test files found". Hoje executa os testes do ms-users |
 | `npm run test:unit` | Termina com código `0` |
 | `npm run test:integration` | Termina com código `0` |
 
